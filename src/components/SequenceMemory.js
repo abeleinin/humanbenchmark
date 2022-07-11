@@ -1,15 +1,12 @@
+import Tile from "./Tile";
+
 function SequenceMemory() {
+  const idList = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
   return (
-    <div>
-      <button className="bg-white p-5 rounded-md">1</button>
-      <button className="bg-white p-5 rounded-md">2</button>
-      <button className="bg-white p-5 rounded-md">3</button>
-      <button className="bg-white p-5 rounded-md">4</button>
-      <button className="bg-white p-5 rounded-md">5</button>
-      <button className="bg-white p-5 rounded-md">6</button>
-      <button className="bg-white p-5 rounded-md">7</button>
-      <button className="bg-white p-5 rounded-md">8</button>
-      <button className="bg-white p-5 rounded-md">9</button>
+    <div className="grid grid-cols-[150px_150px_150px] grid-rows-[150px_150px_150px] gap-4 justify-center">
+      {idList.map((id, i) => (
+        <Tile key={i} id={id} onClick={() => console.log(id)}></Tile>
+      ))}
     </div>
   );
 }
