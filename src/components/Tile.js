@@ -3,7 +3,9 @@ function Tile({ id, onClick, flash }) {
     <div
       id={id}
       onClick={onClick}
-      className={`bg-slate-400 rounded-md ${flash ? "brightness-125" : ""}`}
+      className={`bg-[#000066] opacity-[.15] rounded-md cursor-pointer ${
+        flash ? "brightness-125" : ""
+      }`}
     ></div>
   );
 }

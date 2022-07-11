@@ -4,7 +4,7 @@ function NavLink({ name, to }) {
   return (
     <Link
       to={to}
-      className="bg-white rounded-lg m-2 text-[#808080] flex items-center h-full cursor-pointer p-10"
+      className="bg-white hover:bg-gray-200 text-black cursor-pointer py-[9px] px-[14px] text-[20px]"
     >
       {name}
     </Link>

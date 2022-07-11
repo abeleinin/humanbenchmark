@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 
 function App() {
   return (
-    <div className="h-screen bg-slate-600 font-mono text-center p-4">
+    <div className="h-screen bg-[#EEE] font-mono text-center">
       <Router>
         <Navbar />
         <Routes>

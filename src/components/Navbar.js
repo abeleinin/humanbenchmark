@@ -2,10 +2,11 @@ import NavLink from "./NavLink";
 
 function Navbar() {
   return (
-    <nav className="h-[84px] flex justify-between p-2">
-      <div className="flex items-center">
-        <NavLink name="Home" to="/" />
-        <NavLink name="Sequence" to="/sequence" />
+    <nav className="fixed top-0 left-0 h-[48px] bg-white w-full shadow-md">
+      {/* Add links here */}
+      <div className="flex justify-center">
+        <NavLink name="HOME" to="/" />
+        <NavLink name="SEQUENCE" to="/sequence" />
       </div>
     </nav>
   );
