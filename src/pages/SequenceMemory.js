@@ -1,4 +1,4 @@
-import Tile from "./Tile";
+import Tile from "../components/Tile";
 
 function SequenceMemory() {
   const idList = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
