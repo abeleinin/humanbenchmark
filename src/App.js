@@ -1,8 +1,10 @@
+import SequenceMemory from "./components/SequenceMemory";
+
 function App() {
   return (
-    <h1 className="text-3xl font-bold underline text-center text-orange-400">
-      Hello world!
-    </h1>
+    <div className="h-screen bg-slate-600 font-mono text-center">
+      <SequenceMemory />
+    </div>
   );
 }
 
