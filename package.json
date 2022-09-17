@@ -13,6 +13,7 @@
   "author": "Abe Leinigner",
   "license": "MIT",
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.9",
     "@chakra-ui/react": "^2.3.2",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -22,6 +23,8 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/node": "18.7.18",
+    "@types/react": "18.0.20",
     "eslint": "^8.23.1",
     "eslint-config-next": "^12.3.0",
     "prettier": "^2.7.1"
