@@ -16,10 +16,9 @@ import { HamburgerIcon } from '@chakra-ui/icons'
 
 const LinkItem = ({ href, path, children }) => {
   const active = path === href
-  const inactiveColor = '#000'
   return (
     <NextLink href={href}>
-      <Link p={2} bg="#fff" color={active ? '#E5E7EB' : inactiveColor}>
+      <Link p={3} m={0} bg={active ? '#eeeeee' : undefined}>
         {children}
       </Link>
     </NextLink>
@@ -32,6 +31,7 @@ const Navbar = props => {
   return (
     <Box
       position="fixed"
+      h="48px"
       as="nav"
       w="100%"
       bg="#ffffff"
@@ -41,42 +41,53 @@ const Navbar = props => {
     >
       <Container
         display="flex"
-        p={2}
         maxW="container.lg"
         flexWrap="wrap"
         textAlign="center"
         justifyContent="space-between"
       >
-        <Flex align="center" mr={5}>
-          <Heading as="h1" size="md" color="#000">
-            <Link href="/">
+        <Flex align="center">
+          <Heading size="md" color="#000">
+            <LinkItem href="/" path={path}>
               <a>⚡️ HUMAN BENCHMARK</a>
-            </Link>
+            </LinkItem>
           </Heading>
         </Flex>
-        <Stack>
-          <LinkItem href="/sequence" path={path}>
-            Sequence Memory
+        <Stack
+          direction={{ base: 'column', md: 'row' }}
+          display={{ base: 'none', md: 'flex' }}
+          width={{ base: 'full', md: 'auto' }}
+          alignItems="center"
+          flexGrow={1}
+          mt={{ base: 4, nmd: 0 }}
+        >
+          <LinkItem href="/tests/sequence" path={path}>
+            DASHBOARD
           </LinkItem>
         </Stack>
-        <Box flex={1} alignContent="right">
+        <Box flex={0} alignContent="right">
           <Box ml={2} display={{ base: 'inline-block', md: 'none' }}>
             <Menu>
               <MenuButton
                 as={IconButton}
-                icon={<HamburgerIcon />}
+                icon={<HamburgerIcon color="black" />}
+                colorScheme="black"
+                bgColor="#eeeeee"
                 variant="outline"
                 aria-label="Options"
-              >
-                <MenuList>
-                  <NextLink href="/" passHref>
-                    <MenuItem as={Link}>Home</MenuItem>
-                  </NextLink>
-                  <NextLink href="/sequence" passHref>
-                    <MenuItem as={Link}>Sequence Memory</MenuItem>
-                  </NextLink>
-                </MenuList>
-              </MenuButton>
+              />
+              <MenuList bg="#fff">
+                <NextLink href="/" passHref>
+                  <MenuItem as={Link} _hover={{ bg: '#eeeeee' }}>
+                    Home
+                  </MenuItem>
+                </NextLink>
+                <NextLink href="/tests/sequence" passHref>
+                  <MenuItem as={Link} _hover={{ bg: '#eeeeee' }}>
+                    Sequence Memory
+                  </MenuItem>
+                </NextLink>
+              </MenuList>
             </Menu>
           </Box>
         </Box>

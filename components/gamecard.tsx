@@ -1,24 +1,29 @@
+import NextLink from 'next/link'
 import { Box, Center, Container, Heading, Text } from '@chakra-ui/react'
 
-const GameCard = ({ name, text, href, path }) => {
+const Gamecard = ({ children, name, symbol, href }) => {
   return (
     <Container>
-      <Center
-        w="300px"
-        h="300px"
-        textAlign="center"
-        bg="#ffffff"
-        shadow="md"
-        borderRadius="lg"
-        cursor="pointer"
-      >
-        <Heading size="lg" m={4}>
-          {name}
-        </Heading>
-        <Text>{text}</Text>
-      </Center>
+      <NextLink href={href}>
+        <Box
+          w="300px"
+          h="250px"
+          textAlign="center"
+          bg="#ffffff"
+          shadow="md"
+          borderRadius="lg"
+          cursor="pointer"
+          pt={5}
+        >
+          <Heading size="2xl">{symbol}</Heading>
+          <Heading size="lg" m={4}>
+            {name}
+          </Heading>
+          <Text p={3}>{children}</Text>
+        </Box>
+      </NextLink>
     </Container>
   )
 }
 
-export default GameCard
+export default Gamecard
