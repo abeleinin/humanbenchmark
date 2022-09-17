@@ -46,10 +46,10 @@ const Navbar = props => {
         textAlign="center"
         justifyContent="space-between"
       >
-        <Flex align="center">
+        <Flex align="center" _hover={{ bg: '#eee' }}>
           <Heading size="md" color="#000">
             <LinkItem href="/" path={path}>
-              <a>⚡️ HUMAN BENCHMARK</a>
+              ⚡️ HUMAN BENCHMARK
             </LinkItem>
           </Heading>
         </Flex>

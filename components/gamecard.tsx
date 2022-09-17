@@ -13,13 +13,16 @@ const Gamecard = ({ children, name, symbol, href }) => {
           shadow="md"
           borderRadius="lg"
           cursor="pointer"
-          pt={5}
+          pt={8}
+          _hover={{ boxShadow: 'outline' }}
         >
           <Heading size="2xl">{symbol}</Heading>
-          <Heading size="lg" m={4}>
+          <Heading size="lg" mx={4} mt={4}>
             {name}
           </Heading>
-          <Text p={3}>{children}</Text>
+          <Text p={2} fontSize="14pt">
+            {children}
+          </Text>
         </Box>
       </NextLink>
     </Container>
