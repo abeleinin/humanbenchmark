@@ -39,7 +39,7 @@ const Page = () => {
             </Gamecard>
           </WrapItem>
           <WrapItem>
-            <Gamecard name="Reaction Time" symbol="⚡️" href="/">
+            <Gamecard name="Reaction Time" symbol="⚡️" href="/tests/reaction">
               Coming soon!
             </Gamecard>
           </WrapItem>
@@ -49,12 +49,17 @@ const Page = () => {
             </Gamecard>
           </WrapItem>
           <WrapItem>
-            <Gamecard name="Number Memory" symbol="🔢" href="/">
+            <Gamecard name="Number Memory" symbol="🔢" href="/tests/number">
               Coming soon!
             </Gamecard>
           </WrapItem>
           <WrapItem>
             <Gamecard name="Verbal Memory" symbol="🗣" href="/">
+              Coming Soon!
+            </Gamecard>
+          </WrapItem>
+          <WrapItem>
+            <Gamecard name="1 to 50" symbol="🔢" href="/tests/one-to-fifty">
               Coming Soon!
             </Gamecard>
           </WrapItem>
