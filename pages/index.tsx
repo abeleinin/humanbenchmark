@@ -1,5 +1,4 @@
-import {
-  Center,
+import { Center,
   Container,
   Box,
   Heading,

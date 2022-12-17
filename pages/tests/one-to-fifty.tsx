@@ -1,10 +1,27 @@
 import { useState } from 'react'
-import { Button, SimpleGrid } from '@chakra-ui/react'
+import { Button, flexbox, SimpleGrid } from '@chakra-ui/react'
 import Board from '../../components/board'
+import timeout from '../../components/util'
 
 function OneToFifty() {
-  const numberList = Array.from({ length: 25 }, (_, i) => i + 1)
   const [flashTile, setFlashTile] = useState('')
+
+  const numberList = Array.from({ length: 25 }, (_, i) => i + 1)
+  const [seenList, setSeenList] = useState([])
+  const [currentNumber, setCurrentNumber] = useState(1)
+
+  async function tileClickHandle(number) {
+    if (number === currentNumber) {
+      const copySequence = [...seenList]
+      copySequence.push(number)
+      setSeenList(copySequence)
+      setCurrentNumber(currentNumber + 1)
+    } else {
+      setFlashTile(number.toString())
+      await timeout(200)
+      setFlashTile('')
+    }
+  }
 
   return (
     <Board>
@@ -12,11 +29,14 @@ function OneToFifty() {
         {numberList &&
           numberList.map((v, i) => (
             <Button
+              // hidden={seenList.includes(v) ? true : false}
+              size={'8'}
               key={v}
               bg="white"
-              p="12"
+              p="8"
               rounded="md"
-              opacity={flashTile === v ? '1' : '0.2'}
+              opacity={seenList.includes(v) ? '0' : '0.2'}
+              // flashTile === v.toString() ? '0' : '0.2'
               _hover={{}}
               onClick={() => tileClickHandle(v)}
             >
