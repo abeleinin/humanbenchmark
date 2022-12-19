@@ -11,7 +11,7 @@ function Sequence() {
   const initPlay = {
     isDisplay: false,
     userTurn: false,
-    score: 1,
+    score: 0,
     tileSequence: [],
     userGuess: [],
     prevTile: '',
