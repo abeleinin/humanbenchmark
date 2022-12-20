@@ -39,6 +39,11 @@ const Page = () => {
             </Gamecard>
           </WrapItem>
           <WrapItem>
+            <Gamecard name="1 to 50" symbol="🔢" href="/tests/one-to-fifty">
+              Click the tiles from 1 to 50 as fast as possible!
+            </Gamecard>
+          </WrapItem>
+          <WrapItem>
             <Gamecard name="Reaction Time" symbol="⚡️" href="/tests/reaction">
               Coming soon!
             </Gamecard>
@@ -55,11 +60,6 @@ const Page = () => {
           </WrapItem>
           <WrapItem>
             <Gamecard name="Verbal Memory" symbol="🗣" href="/">
-              Coming Soon!
-            </Gamecard>
-          </WrapItem>
-          <WrapItem>
-            <Gamecard name="1 to 50" symbol="🔢" href="/tests/one-to-fifty">
               Coming Soon!
             </Gamecard>
           </WrapItem>
