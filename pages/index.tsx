@@ -31,7 +31,7 @@ const Page = () => {
           </Titlescreen>
         </Box>
       </Center>
-      <Container maxW="container.lg">
+      <Container maxW={'full'}>
         <Wrap mx="100px" spacingX="5px" spacingY="30px" justify="center" py={8}>
           <WrapItem>
             <Gamecard name="Sequence Memory" symbol="🧠" href="/tests/sequence">
@@ -41,6 +41,11 @@ const Page = () => {
           <WrapItem>
             <Gamecard name="1 to 50" symbol="🔢" href="/tests/one-to-fifty">
               Click the tiles from 1 to 50 as fast as possible!
+            </Gamecard>
+          </WrapItem>
+          <WrapItem>
+            <Gamecard name="Mental Math" symbol="🔢" href="/tests/mental-math">
+              Solve as many mental math equations as fast as possible!
             </Gamecard>
           </WrapItem>
           <WrapItem>

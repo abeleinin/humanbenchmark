@@ -1,5 +1,4 @@
 import { useCallback } from 'react'
-import { SettingsIcon } from '@chakra-ui/icons'
 import { Heading } from '@chakra-ui/react'
 import { Box, Button } from '@chakra-ui/react'
 import { motion } from 'framer-motion'

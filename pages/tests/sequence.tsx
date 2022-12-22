@@ -3,6 +3,7 @@ import { Component, useEffect, useState } from 'react'
 import Board from '../../components/board'
 import Titlescreen from '../../components/titlescreen'
 import timeout from '../../components/util'
+import Level from '../../components/level'
 
 function Sequence() {
   const [isOn, setIsOn] = useState(false)
@@ -14,8 +15,7 @@ function Sequence() {
     score: 0,
     tileSequence: [],
     userGuess: [],
-    prevTile: '',
-    gameOver: false
+    prevTile: ''
   }
 
   const [play, setPlay] = useState(initPlay)
@@ -116,9 +116,7 @@ function Sequence() {
     return (
       <Board>
         <Box>
-          <Heading size="xl" py={4} color="blue.200">
-            Level: {play.score}
-          </Heading>
+          <Level>{play.score}</Level>
           <SimpleGrid spacing="5" columns={{ md: 3 }}>
             {numberList &&
               numberList.map((v, i) => (

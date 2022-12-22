@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react'
 import { Button, Heading, SimpleGrid, Box } from '@chakra-ui/react'
 import Board from '../../components/board'
 import Titlescreen from '../../components/titlescreen'
-import timeout from '../../components/util'
-import { time } from 'console'
 
 function OneToFifty() {
   const [isOn, setIsOn] = useState(false)
@@ -33,15 +31,6 @@ function OneToFifty() {
     }
     return () => clearInterval(interval)
   }, [isRunning, time])
-
-  // Turn on game
-  useEffect(() => {
-    if (isOn) {
-      setPlay({ ...initPlay })
-    } else {
-      setPlay(initPlay)
-    }
-  }, [isOn])
 
   useEffect(() => {
     if (isOn) {
