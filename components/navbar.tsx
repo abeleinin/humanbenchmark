@@ -65,6 +65,11 @@ const Navbar = props => {
             DASHBOARD
           </LinkItem>
         </Stack>
+        <Stack display={{ base: 'none', md: 'flex' }}>
+          <LinkItem href="/login" path={path}>
+            LOGIN
+          </LinkItem>
+        </Stack>
         <Box flex={0} alignContent="right">
           <Box ml={2} display={{ base: 'inline-block', md: 'none' }}>
             <Menu>
