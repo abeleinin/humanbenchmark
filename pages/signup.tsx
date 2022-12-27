@@ -1,70 +1,93 @@
 import {
+  Flex,
   Box,
-  Button,
-  Checkbox,
   Container,
-  Divider,
   FormControl,
   FormLabel,
-  Heading,
-  HStack,
   Input,
+  InputGroup,
+  HStack,
+  InputRightElement,
   Stack,
+  Button,
+  Heading,
   Text,
-  useBreakpointValue,
-  useColorModeValue
+  useColorModeValue,
+  Link,
+  Divider
 } from '@chakra-ui/react'
-import Head from 'next/head'
-import * as React from 'react'
+import { useState } from 'react'
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { OAuthButtonGroup } from '../components/login/OAuthButtonGroup'
-import { PasswordField } from '../components/login/PasswordField'
 
 function Signup() {
+  const [showPassword, setShowPassword] = useState(false)
+
   return (
-    <Container
-      maxW="lg"
-      mt="4"
-      py={{ base: '8', md: '16' }}
-      px={{ base: '0', sm: '8' }}
-      bg="#2b87d1"
-      borderRadius="xl"
-    >
-      <Stack spacing="8">
-        <Stack spacing="6">
-          <Stack spacing={{ base: '2', md: '3' }} textAlign="center"></Stack>
-          <Heading textAlign="center">Log In</Heading>
-        </Stack>
-        <Box
-          py={{ base: '0', sm: '8' }}
-          px={{ base: '4', sm: '10' }}
-          bg={{ base: 'white', sm: 'bg-surface' }}
-          boxShadow={{ base: 'none', sm: useColorModeValue('md', 'md-dark') }}
-          borderRadius={{ base: 'none', sm: 'xl' }}
-        >
-          <Stack spacing="6">
-            <Stack spacing="5">
-              <FormControl>
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <Input id="email" type="email" />
+    <Flex py="4" align={'center'} justify={'center'}>
+      <Container
+        maxW="lg"
+        py="8"
+        px={{ base: '0', sm: '6' }}
+        bg="#2b87d1"
+        borderRadius="xl"
+      >
+        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+          <Stack align={'center'}>
+            <Heading fontSize={'4xl'} textAlign={'center'} color="white">
+              Sign up
+            </Heading>
+          </Stack>
+          <Box
+            rounded={'lg'}
+            bg={useColorModeValue('white', 'gray.700')}
+            boxShadow={'lg'}
+            p={8}
+          >
+            <Stack spacing={4}>
+              <FormControl id="userName" isRequired>
+                <FormLabel>Username</FormLabel>
+                <Input type="text" />
               </FormControl>
-              <PasswordField />
-            </Stack>
-            <HStack justify="space-between">
-              <Checkbox defaultChecked>Remember me</Checkbox>
-              <Button variant="link" colorScheme="blue" size="sm">
-                Forgot password?
-              </Button>
-            </HStack>
-            <Stack spacing="6">
-              <HStack spacing="1" justify="center">
-                <Text color="muted">Don't have an account?</Text>
-                <Button variant="link" colorScheme="blue">
+              <FormControl id="email" isRequired>
+                <FormLabel>Email</FormLabel>
+                <Input type="email" />
+              </FormControl>
+              <FormControl id="password" isRequired>
+                <FormLabel>Password</FormLabel>
+                <InputGroup>
+                  <Input type={showPassword ? 'text' : 'password'} />
+                  <InputRightElement h={'full'}>
+                    <Button
+                      variant={'ghost'}
+                      onClick={() =>
+                        setShowPassword(showPassword => !showPassword)
+                      }
+                    >
+                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+              </FormControl>
+              <Stack spacing={10} pt={2}>
+                <Button
+                  loadingText="Submitting"
+                  size="lg"
+                  bg={'blue.400'}
+                  color={'white'}
+                  _hover={{
+                    bg: 'blue.500'
+                  }}
+                >
                   Sign up
                 </Button>
-              </HStack>
-              <Button bg="#2b87d1" variant="primary">
-                Sign in
-              </Button>
+              </Stack>
+              <Text align={'center'}>
+                Already a user?{' '}
+                <Link href="/login" color={'blue.400'}>
+                  Login
+                </Link>
+              </Text>
               <HStack>
                 <Divider />
                 <Text fontSize="sm" whiteSpace="nowrap" color="muted">
@@ -74,10 +97,10 @@ function Signup() {
               </HStack>
               <OAuthButtonGroup />
             </Stack>
-          </Stack>
-        </Box>
-      </Stack>
-    </Container>
+          </Box>
+        </Stack>
+      </Container>
+    </Flex>
   )
 }
 

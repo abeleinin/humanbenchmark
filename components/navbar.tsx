@@ -66,6 +66,11 @@ const Navbar = props => {
           </LinkItem>
         </Stack>
         <Stack display={{ base: 'none', md: 'flex' }}>
+          <LinkItem href="/signup" path={path}>
+            SIGNUP
+          </LinkItem>
+        </Stack>
+        <Stack display={{ base: 'none', md: 'flex' }}>
           <LinkItem href="/login" path={path}>
             LOGIN
           </LinkItem>
