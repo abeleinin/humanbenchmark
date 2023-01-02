@@ -12,17 +12,45 @@ import {
   Button,
   Heading,
   Text,
-  useColorModeValue,
+  Alert,
   Link,
   Divider,
   Checkbox
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { OAuthButtonGroup } from '../components/login/OAuthButtonGroup'
+import { useAuth } from '../contexts/AuthContext'
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false)
+  const emailRef = useRef<HTMLInputElement>()
+  const passwordRef = useRef<HTMLInputElement>()
+  const { loginUser } = useAuth()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    try {
+      setError('')
+      setLoading(true)
+      await loginUser(emailRef.current.value, passwordRef.current.value)
+    } catch (e) {
+      console.log(e)
+      if (e.code == 'auth/user-not-found') {
+        setError('No account for given email')
+      } else if (e.code === 'auth/invalid-email') {
+        setError('Invalid email')
+      } else if (e.code === 'auth/wrong-password') {
+        setError('Incorrect password')
+      } else {
+        setError('Failed to login account')
+      }
+    }
+    setLoading(false)
+  }
 
   return (
     <Flex py="4" align={'center'} justify={'center'}>
@@ -38,22 +66,25 @@ function Login() {
             <Heading fontSize={'4xl'} textAlign={'center'} color="white">
               Log In
             </Heading>
+            {error && (
+              <Alert status="error" borderRadius="xl">
+                {error}
+              </Alert>
+            )}
           </Stack>
-          <Box
-            rounded={'lg'}
-            bg={useColorModeValue('white', 'gray.700')}
-            boxShadow={'lg'}
-            p={8}
-          >
+          <Box rounded={'lg'} bg="white" boxShadow={'lg'} p={8}>
             <Stack spacing={4}>
               <FormControl id="userName" isRequired>
-                <FormLabel>Username</FormLabel>
-                <Input type="text" />
+                <FormLabel>Email</FormLabel>
+                <Input type="email" ref={emailRef} />
               </FormControl>
               <FormControl id="password" isRequired>
                 <FormLabel>Password</FormLabel>
                 <InputGroup>
-                  <Input type={showPassword ? 'text' : 'password'} />
+                  <Input
+                    type={showPassword ? 'text' : 'password'}
+                    ref={passwordRef}
+                  />
                   <InputRightElement h={'full'}>
                     <Button
                       variant={'ghost'}
@@ -84,14 +115,16 @@ function Login() {
                   _hover={{
                     bg: 'blue.500'
                   }}
+                  onClick={handleSubmit}
+                  disabled={loading}
                 >
                   Sign In
                 </Button>
               </Stack>
               <Text align={'center'}>
-                Already a user?{' '}
-                <Link href="/login" color={'blue.400'}>
-                  Login
+                Need an account?{' '}
+                <Link href="/signup" color={'blue.400'}>
+                  Sign Up
                 </Link>
               </Text>
               <HStack>

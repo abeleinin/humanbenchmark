@@ -12,16 +12,48 @@ import {
   Button,
   Heading,
   Text,
-  useColorModeValue,
   Link,
-  Divider
+  Divider,
+  Alert
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { OAuthButtonGroup } from '../components/login/OAuthButtonGroup'
+import { useAuth } from '../contexts/AuthContext'
 
 function Signup() {
   const [showPassword, setShowPassword] = useState(false)
+  const usernameRef = useRef<HTMLInputElement>()
+  const emailRef = useRef<HTMLInputElement>()
+  const passwordRef = useRef<HTMLInputElement>()
+  const passwordConfirmRef = useRef<HTMLInputElement>()
+  const { createUser } = useAuth()
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setError('Passwords do not match')
+    }
+
+    try {
+      setError('')
+      setLoading(true)
+      await createUser(emailRef.current.value, passwordRef.current.value)
+    } catch (e) {
+      console.log(e)
+      if (e.code == 'auth/weak-password') {
+        setError('Password is too weak')
+      } else if (e.code === 'auth/email-already-in-use') {
+        setError('Email is already in use')
+      } else {
+        setError('Failed to create an account')
+      }
+    }
+    setLoading(false)
+  }
 
   return (
     <Flex py="4" align={'center'} justify={'center'}>
@@ -37,26 +69,48 @@ function Signup() {
             <Heading fontSize={'4xl'} textAlign={'center'} color="white">
               Sign up
             </Heading>
+            {error && (
+              <Alert status="error" borderRadius="xl">
+                {error}
+              </Alert>
+            )}
           </Stack>
-          <Box
-            rounded={'lg'}
-            bg={useColorModeValue('white', 'gray.700')}
-            boxShadow={'lg'}
-            p={8}
-          >
+          <Box rounded={'lg'} bg="white" boxShadow={'lg'} p={8}>
             <Stack spacing={4}>
               <FormControl id="userName" isRequired>
                 <FormLabel>Username</FormLabel>
-                <Input type="text" />
+                <Input type="text" ref={usernameRef} />
               </FormControl>
               <FormControl id="email" isRequired>
                 <FormLabel>Email</FormLabel>
-                <Input type="email" />
+                <Input type="email" ref={emailRef} />
               </FormControl>
               <FormControl id="password" isRequired>
                 <FormLabel>Password</FormLabel>
                 <InputGroup>
-                  <Input type={showPassword ? 'text' : 'password'} />
+                  <Input
+                    type={showPassword ? 'text' : 'password'}
+                    ref={passwordRef}
+                  />
+                  <InputRightElement h={'full'}>
+                    <Button
+                      variant={'ghost'}
+                      onClick={() =>
+                        setShowPassword(showPassword => !showPassword)
+                      }
+                    >
+                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+              </FormControl>
+              <FormControl id="confirmPassword" isRequired>
+                <FormLabel>Password Confirmation</FormLabel>
+                <InputGroup>
+                  <Input
+                    type={showPassword ? 'text' : 'password'}
+                    ref={passwordConfirmRef}
+                  />
                   <InputRightElement h={'full'}>
                     <Button
                       variant={'ghost'}
@@ -78,6 +132,8 @@ function Signup() {
                   _hover={{
                     bg: 'blue.500'
                   }}
+                  onClick={handleSubmit}
+                  disabled={loading}
                 >
                   Sign up
                 </Button>
