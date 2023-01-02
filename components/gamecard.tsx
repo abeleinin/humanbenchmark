@@ -1,10 +1,11 @@
 import NextLink from 'next/link'
 import { Box, Center, Container, Heading, Text } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
-const Gamecard = ({ children, name, symbol, href }) => {
+const Gamecard = ({ children, name, symbol, to }) => {
   return (
     <Container>
-      <NextLink href={href}>
+      <Link to={to}>
         <Box
           w="300px"
           h="250px"
@@ -24,7 +25,7 @@ const Gamecard = ({ children, name, symbol, href }) => {
             {children}
           </Text>
         </Box>
-      </NextLink>
+      </Link>
     </Container>
   )
 }

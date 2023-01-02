@@ -10,23 +10,51 @@ import {
   MenuList,
   MenuItem,
   MenuButton,
-  IconButton
+  IconButton,
+  Button
 } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
 import { HamburgerIcon } from '@chakra-ui/icons'
+import { Link as RouterLink } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
 
-const LinkItem = ({ href, path, children }) => {
-  const active = path === href
+const LinkItem = ({ to, path, children }) => {
+  const active = path === to
   return (
-    <NextLink href={href}>
-      <Link p={3} m={0} bg={active ? '#eeeeee' : undefined}>
+    <RouterLink to={to}>
+      <Box p={3} m={0} bg={active ? '#eeeeee' : undefined}>
         {children}
-      </Link>
-    </NextLink>
+      </Box>
+    </RouterLink>
   )
 }
 
-const Navbar = props => {
+function Navbar(props) {
   const { path } = props
+  const [guest, setGuest] = useState(true)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const { logoutUser, currentUser } = useAuth()
+
+  useEffect(() => {
+    if (currentUser != null) {
+      setGuest(false)
+    } else {
+      setGuest(true)
+    }
+  }, [currentUser])
+
+  async function handleLogout(e) {
+    e.preventDefault()
+
+    try {
+      setLoading(true)
+      await logoutUser()
+    } catch (e) {
+      setError('Failed')
+    }
+    setLoading(false)
+  }
 
   return (
     <Box
@@ -48,7 +76,7 @@ const Navbar = props => {
       >
         <Flex align="center" _hover={{ bg: '#eee' }}>
           <Heading size="md" color="#000">
-            <LinkItem href="/" path={path}>
+            <LinkItem to="/" path={path}>
               ⚡️ HUMAN BENCHMARK
             </LinkItem>
           </Heading>
@@ -61,19 +89,28 @@ const Navbar = props => {
           flexGrow={1}
           mt={{ base: 4, nmd: 0 }}
         >
-          <LinkItem href="/tests/sequence" path={path}>
+          <LinkItem to="/tests/sequence" path={path}>
             DASHBOARD
           </LinkItem>
         </Stack>
-        <Stack display={{ base: 'none', md: 'flex' }}>
-          <LinkItem href="/signup" path={path}>
+        <Stack display={{ base: 'none', md: 'flex' }} hidden={!guest}>
+          <LinkItem to="/signup" path={path}>
             SIGNUP
           </LinkItem>
         </Stack>
-        <Stack display={{ base: 'none', md: 'flex' }}>
-          <LinkItem href="/login" path={path}>
+        <Stack display={{ base: 'none', md: 'flex' }} hidden={!guest}>
+          <LinkItem to="/login" path={path}>
             LOGIN
           </LinkItem>
+        </Stack>
+        <Stack
+          justify={'center'}
+          display={{ base: 'none', md: 'flex' }}
+          hidden={guest}
+        >
+          <Button onClick={handleLogout} disabled={loading}>
+            SIGN OUT
+          </Button>
         </Stack>
         <Box flex={0} alignContent="right">
           <Box ml={2} display={{ base: 'inline-block', md: 'none' }}>

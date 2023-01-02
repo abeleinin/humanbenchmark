@@ -43,7 +43,6 @@ function Signup() {
       setLoading(true)
       await createUser(emailRef.current.value, passwordRef.current.value)
     } catch (e) {
-      console.log(e)
       if (e.code == 'auth/weak-password') {
         setError('Password is too weak')
       } else if (e.code === 'auth/email-already-in-use') {

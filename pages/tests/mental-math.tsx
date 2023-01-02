@@ -4,7 +4,7 @@ import Board from '../../components/board'
 import Level from '../../components/level'
 import Titlescreen from '../../components/titlescreen'
 
-function Mental() {
+function MentalMath() {
   const [isOn, setIsOn] = useState(false)
   const [isOver, setIsOver] = useState(false)
   let [value, setValue] = useState('')
@@ -140,4 +140,4 @@ function Mental() {
     )
   }
 }
-export default Mental
+export default MentalMath

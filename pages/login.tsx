@@ -21,6 +21,7 @@ import { useState, useRef } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { OAuthButtonGroup } from '../components/login/OAuthButtonGroup'
 import { useAuth } from '../contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false)
@@ -29,6 +30,7 @@ function Login() {
   const { loginUser } = useAuth()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const navigate = useNavigate()
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -37,8 +39,8 @@ function Login() {
       setError('')
       setLoading(true)
       await loginUser(emailRef.current.value, passwordRef.current.value)
+      navigate('/')
     } catch (e) {
-      console.log(e)
       if (e.code == 'auth/user-not-found') {
         setError('No account for given email')
       } else if (e.code === 'auth/invalid-email') {
