@@ -27,7 +27,7 @@ function Signup() {
   const emailRef = useRef<HTMLInputElement>()
   const passwordRef = useRef<HTMLInputElement>()
   const passwordConfirmRef = useRef<HTMLInputElement>()
-  const { createUser } = useAuth()
+  const { createUser, writeUserData, currentUser } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -42,6 +42,11 @@ function Signup() {
       setError('')
       setLoading(true)
       await createUser(emailRef.current.value, passwordRef.current.value)
+      await writeUserData(
+        currentUser.uid,
+        usernameRef.current.value,
+        emailRef.current.value
+      )
     } catch (e) {
       if (e.code == 'auth/weak-password') {
         setError('Password is too weak')

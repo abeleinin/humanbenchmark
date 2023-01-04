@@ -5,7 +5,8 @@ import {
   signInWithEmailAndPassword,
   signOut
 } from 'firebase/auth'
-import { auth } from '../firebase'
+import { ref, set } from 'firebase/database'
+import { auth, database } from '../firebase'
 
 const AuthContext = createContext()
 
@@ -38,11 +39,19 @@ export function AuthProvider({ children }) {
     return unsubscribe
   }, [])
 
+  function writeUserData(userId, name, email) {
+    set(ref(database, 'users/' + userId), {
+      username: name,
+      email: email
+    })
+  }
+
   const value = {
     currentUser,
     createUser,
     loginUser,
-    logoutUser
+    logoutUser,
+    writeUserData
   }
 
   return (
