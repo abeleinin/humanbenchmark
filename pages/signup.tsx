@@ -20,6 +20,10 @@ import { useEffect, useRef, useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { OAuthButtonGroup } from '../components/login/OAuthButtonGroup'
 import { useAuth } from '../contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
+import { useDB } from '../contexts/DatabaseContext'
+import { setDoc, doc } from 'firebase/firestore'
+import { db } from '../firebase'
 
 function Signup() {
   const [showPassword, setShowPassword] = useState(false)
@@ -27,9 +31,11 @@ function Signup() {
   const emailRef = useRef<HTMLInputElement>()
   const passwordRef = useRef<HTMLInputElement>()
   const passwordConfirmRef = useRef<HTMLInputElement>()
-  const { createUser, writeUserData, currentUser } = useAuth()
+  const { createUser } = useAuth()
+  const { setData } = useDB()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -38,22 +44,23 @@ function Signup() {
       return setError('Passwords do not match')
     }
 
+    // Sign in user
     try {
       setError('')
       setLoading(true)
-      await createUser(emailRef.current.value, passwordRef.current.value)
-      await writeUserData(
-        currentUser.uid,
-        usernameRef.current.value,
-        emailRef.current.value
+      const uid = await createUser(
+        emailRef.current.value,
+        passwordRef.current.value
       )
+      await setData(uid, usernameRef.current.value, emailRef.current.value)
+      navigate('/')
     } catch (e) {
       if (e.code == 'auth/weak-password') {
         setError('Password is too weak')
       } else if (e.code === 'auth/email-already-in-use') {
         setError('Email is already in use')
       } else {
-        setError('Failed to create an account')
+        setError(e.code)
       }
     }
     setLoading(false)

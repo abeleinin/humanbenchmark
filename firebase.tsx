@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
-import { getDatabase } from 'firebase/database'
+import { getFirestore } from 'firebase/firestore'
 
 // const firebaseConfig = {
 // apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -17,12 +17,12 @@ const firebaseConfig = {
   projectId: 'hb-dev-f2719',
   storageBucket: 'hb-dev-f2719.appspot.com',
   messagingSenderId: '377694841570',
-  appId: '1:377694841570:web:e7c037b9a27376f3fc8cbb'
-  //databaseURL: 'https://hb-dev-f2719-default-rtdb.firebaseio.com/'
+  appId: '1:377694841570:web:e7c037b9a27376f3fc8cbb',
+  databaseURL: 'https://hb-dev-f2719-default-rtdb.firebaseio.com'
 }
 
 const app = initializeApp(firebaseConfig)
 
 export const auth = getAuth(app)
-export const database = getDatabase(app)
+export const db = getFirestore(app)
 export default app

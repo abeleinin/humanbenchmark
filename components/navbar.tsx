@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { Link as RouterLink } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import { useDB } from '../contexts/DatabaseContext'
 
 const LinkItem = ({ to, path, children }) => {
   const active = path === to
@@ -35,10 +36,13 @@ function Navbar(props) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const { logoutUser, currentUser } = useAuth()
+  const { getData } = useDB()
+  const [username, setUsername] = useState('')
 
   useEffect(() => {
     if (currentUser != null) {
       setGuest(false)
+      console.log(getData())
     } else {
       setGuest(true)
     }
@@ -49,6 +53,7 @@ function Navbar(props) {
 
     try {
       setLoading(true)
+      setUsername('')
       await logoutUser()
     } catch (e) {
       setError('Failed')
@@ -89,7 +94,7 @@ function Navbar(props) {
           flexGrow={1}
           mt={{ base: 4, nmd: 0 }}
         >
-          <LinkItem to="/tests/sequence" path={path}>
+          <LinkItem to="/dashboard" path={path}>
             DASHBOARD
           </LinkItem>
         </Stack>
@@ -103,6 +108,7 @@ function Navbar(props) {
             LOGIN
           </LinkItem>
         </Stack>
+        <Heading size="md">{username}</Heading>
         <Stack
           justify={'center'}
           display={{ base: 'none', md: 'flex' }}

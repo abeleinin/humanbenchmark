@@ -10,7 +10,7 @@ import Footer from '../components/footer'
 import Gamecard from '../components/gamecard'
 import Titlescreen from '../components/titlescreen'
 
-const Home = () => {
+function Home() {
   return (
     <Box h="100%">
       <Center w="100%" h="70%" bg="#2b87d1">

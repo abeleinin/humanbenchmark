@@ -1,5 +1,7 @@
 import { Button, SimpleGrid, Heading, Box } from '@chakra-ui/react'
-import { Component, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useAuth } from '../../contexts/AuthContext'
+import { useDB } from '../../contexts/DatabaseContext'
 import Board from '../../components/board'
 import Titlescreen from '../../components/titlescreen'
 import timeout from '../../components/util'
@@ -22,12 +24,16 @@ function Sequence() {
   const [flashTile, setFlashTile] = useState('')
   const [playerScore, setPlayerScore] = useState(0)
 
+  const { currentUser } = useAuth()
+  const { updateData } = useDB()
+
   // Turn on game
   useEffect(() => {
     if (isOn) {
       setPlay({ ...initPlay, isDisplay: true })
     } else {
       setPlay(initPlay)
+      updateData(currentUser.uid, 'sequence', playerScore)
     }
   }, [isOn])
 
