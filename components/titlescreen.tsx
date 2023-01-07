@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { Heading } from '@chakra-ui/react'
+import { Heading, useColorModeValue } from '@chakra-ui/react'
 import { Box, Button } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
@@ -23,7 +23,7 @@ const Titlescreen = ({
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: delay }}
     >
-      <Box fontSize="24px" color="#fff">
+      <Box fontSize="24px" color={useColorModeValue('gray.800', 'gray.200')}>
         <Heading size="4xl" my={4}>
           {symbol}
         </Heading>
@@ -33,10 +33,10 @@ const Titlescreen = ({
         {children}
         <br />
         <Button
-          bg="yellow.400"
-          _hover={{ bg: 'yellow.300' }}
+          bg={useColorModeValue('gray.600', '#fbf1c7')}
+          _hover={{ opacity: '90%' }}
           my={4}
-          color="#000"
+          color={useColorModeValue('gray.200', 'gray.800')}
           fontSize="14pt"
           onClick={changeGame}
         >

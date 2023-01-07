@@ -1,5 +1,11 @@
-import NextLink from 'next/link'
-import { Box, Center, Container, Heading, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Container,
+  Heading,
+  Text,
+  useColorModeValue
+} from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 
 const Gamecard = ({ children, name, symbol, to }) => {
@@ -7,15 +13,16 @@ const Gamecard = ({ children, name, symbol, to }) => {
     <Container>
       <Link to={to}>
         <Box
-          w="300px"
-          h="250px"
+          w="30vw"
+          h="30vh"
           textAlign="center"
-          bg="#ffffff"
-          shadow="md"
+          bg={useColorModeValue('#E6E6E6', '#545454')}
+          color={useColorModeValue('gray.800', 'gray.200')}
+          shadow="lg"
           borderRadius="lg"
           cursor="pointer"
           pt={8}
-          _hover={{ boxShadow: 'outline' }}
+          _hover={{ bg: useColorModeValue('EAEAEA', '#454545') }}
         >
           <Heading size="2xl">{symbol}</Heading>
           <Heading size="lg" mx={4} mt={4}>

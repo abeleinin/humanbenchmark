@@ -13,29 +13,31 @@ import {
   PopoverContent,
   useColorModeValue,
   useBreakpointValue,
-  useDisclosure
+  useDisclosure,
+  useColorMode
 } from '@chakra-ui/react'
 import {
   HamburgerIcon,
   CloseIcon,
+  MoonIcon,
+  SunIcon,
   ChevronDownIcon,
   ChevronRightIcon
 } from '@chakra-ui/icons'
+import { Link as RouterLink } from 'react-router-dom'
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure()
+  const { colorMode, toggleColorMode } = useColorMode()
 
   return (
     <Box>
       <Flex
-        bg={useColorModeValue('white', 'gray.800')}
-        color={useColorModeValue('gray.600', 'white')}
+        bg={useColorModeValue('#f2e5bc', '#1d2021')}
+        color={useColorModeValue('black', 'white')}
         minH={'60px'}
         py={{ base: 2 }}
         px={{ base: 4 }}
-        borderBottom={1}
-        borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
         align={'center'}
       >
         <Flex
@@ -53,13 +55,16 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            fontFamily={'heading'}
-            color={useColorModeValue('gray.800', 'white')}
-          >
-            Cognitive Caliber
-          </Text>
+          <RouterLink to="/">
+            <Text
+              textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+              fontFamily={'heading'}
+              fontSize="md"
+              color={useColorModeValue('white', 'white')}
+            >
+              ⚡️
+            </Text>
+          </RouterLink>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
@@ -72,26 +77,37 @@ export default function WithSubnavigation() {
           direction={'row'}
           spacing={6}
         >
-          <Button
-            as={'a'}
-            fontSize={'sm'}
-            fontWeight={400}
-            variant={'link'}
-            href={'#'}
-          >
-            Sign In
-          </Button>
-          <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'pink.400'}
-            _hover={{
-              bg: 'pink.300'
-            }}
-          >
-            Sign Up
+          <RouterLink to={'/signup'}>
+            <Button
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'md'}
+              fontWeight={600}
+              color={'white'}
+              bg={'blue.500'}
+              _hover={{
+                bg: 'orange.300'
+              }}
+            >
+              Sign In
+            </Button>
+          </RouterLink>
+          <RouterLink to={'login'}>
+            <Button
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'md'}
+              fontWeight={600}
+              color={'white'}
+              bg={'orange.400'}
+              _hover={{
+                bg: 'orange.300'
+              }}
+            >
+              Sign Up
+            </Button>
+          </RouterLink>
+
+          <Button onClick={toggleColorMode}>
+            {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
           </Button>
         </Stack>
       </Flex>
@@ -114,9 +130,9 @@ const DesktopNav = () => {
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
-              <Link
+              <RouterLink
                 p={2}
-                href={navItem.href ?? '#'}
+                to={navItem.to ?? '#'}
                 fontSize={'sm'}
                 fontWeight={500}
                 color={linkColor}
@@ -126,7 +142,7 @@ const DesktopNav = () => {
                 }}
               >
                 {navItem.label}
-              </Link>
+              </RouterLink>
             </PopoverTrigger>
 
             {navItem.children && (
@@ -152,7 +168,7 @@ const DesktopNav = () => {
   )
 }
 
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+const DesktopSubNav = ({ label, to, subLabel }: NavItem) => {
   return (
     <Link
       href={href}
@@ -246,7 +262,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         >
           {children &&
             children.map(child => (
-              <Link key={child.label} py={2} href={child.href}>
+              <Link key={child.label} py={2} href={child.to}>
                 {child.label}
               </Link>
             ))}
@@ -260,46 +276,16 @@ interface NavItem {
   label: string
   subLabel?: string
   children?: Array<NavItem>
-  href?: string
+  to?: string
 }
 
 const NAV_ITEMS: Array<NavItem> = [
   {
+    label: 'Cognitive Caliber',
+    to: '/'
+  },
+  {
     label: 'Dashboard',
-    children: [
-      {
-        label: 'Explore Design Work',
-        subLabel: 'Trending Design to inspire you',
-        href: '#'
-      },
-      {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
-        href: '#'
-      }
-    ]
-  },
-  {
-    label: 'Find Work',
-    children: [
-      {
-        label: 'Job Board',
-        subLabel: 'Find your dream design job',
-        href: '#'
-      },
-      {
-        label: 'Freelance Projects',
-        subLabel: 'An exclusive list for contract work',
-        href: '#'
-      }
-    ]
-  },
-  {
-    label: 'Learn Design',
-    href: '#'
-  },
-  {
-    label: 'Hire Designers',
-    href: '#'
+    to: '/dashboard'
   }
 ]

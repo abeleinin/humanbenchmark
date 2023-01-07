@@ -1,21 +1,21 @@
 import Head from 'next/head'
-import { Box, Container } from '@chakra-ui/react'
+import { Box, Center, Container } from '@chakra-ui/react'
 import Navbar from '../navbar'
 import Footer from '../footer'
 
 const Main = ({ children, router }) => {
   return (
-    <Box as="main" pb={8}>
+    <Box as="main">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Human Benchmark</title>
+        <title>Cognitive Caliber</title>
       </Head>
 
-      <Navbar path={router.asPath} />
+      <Navbar />
 
-      <Container maxWidth="100%" h="100vh" pt={12} px={0}>
+      <Center maxWidth="100%" h="100vh" m="0">
         {children}
-      </Container>
+      </Center>
     </Box>
   )
 }

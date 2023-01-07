@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Button, Heading, SimpleGrid, Box } from '@chakra-ui/react'
+import { Button, Heading, SimpleGrid, Box, AspectRatio } from '@chakra-ui/react'
 import Board from '../../components/board'
 import Titlescreen from '../../components/titlescreen'
 
@@ -105,12 +105,7 @@ function OneToFifty() {
               {Math.round(time * 100) / 100}
             </Heading>
           </Box>
-          <SimpleGrid
-            spacing="2"
-            columns={{ md: 5 }}
-            maxWidth="300"
-            maxHeight="300"
-          >
+          <SimpleGrid spacing="2" columns={5}>
             {play.numberListDisplay &&
               play.numberListDisplay.map((v, i) => (
                 <Button
@@ -118,9 +113,9 @@ function OneToFifty() {
                   hidden={play.currentNumber > 50 ? true : false}
                   // size={'8'}
                   fontSize={'2xl'}
+                  p="6"
                   key={v}
                   colorScheme={v < 26 ? 'whiteAlpha' : 'pink'}
-                  p="6"
                   rounded="md"
                   opacity={play.clicked.includes(v) ? '0' : '1'}
                   // flashTile === v.toString() ? '0' : '0.2'

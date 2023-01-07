@@ -1,4 +1,11 @@
-import { Button, SimpleGrid, Heading, Box } from '@chakra-ui/react'
+import {
+  Button,
+  SimpleGrid,
+  Heading,
+  Box,
+  useColorModeValue,
+  Text
+} from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useAuth } from '../../contexts/AuthContext'
 import { useDB } from '../../contexts/DatabaseContext'
@@ -23,6 +30,7 @@ function Sequence() {
   const [play, setPlay] = useState(initPlay)
   const [flashTile, setFlashTile] = useState('')
   const [playerScore, setPlayerScore] = useState(0)
+  const [highestScore, setHighestScore] = useState(0)
 
   const { currentUser } = useAuth()
   const { updateData } = useDB()
@@ -32,8 +40,13 @@ function Sequence() {
     if (isOn) {
       setPlay({ ...initPlay, isDisplay: true })
     } else {
+      if (playerScore > highestScore) {
+        setHighestScore(playerScore)
+      }
       setPlay(initPlay)
-      updateData(currentUser.uid, 'sequence', playerScore)
+      if (currentUser != null) {
+        updateData(currentUser.uid, 'sequence', playerScore)
+      }
     }
   }, [isOn])
 
@@ -123,13 +136,13 @@ function Sequence() {
       <Board>
         <Box>
           <Level>{play.score}</Level>
-          <SimpleGrid spacing="5" columns={{ md: 3 }}>
+          <SimpleGrid spacing="5" columns={3}>
             {numberList &&
               numberList.map((v, i) => (
                 <Button
                   key={v}
                   bg="white"
-                  p="14"
+                  p={{ base: '10', md: '14' }}
                   rounded="md"
                   opacity={flashTile === v ? '1' : '0.2'}
                   _hover={{}}
@@ -143,22 +156,29 @@ function Sequence() {
   } else if (isOver) {
     return (
       <Board>
-        <Box>
-          <Heading size="xl" color="#fff" p={4}>
+        <Box bg="#fe8019" w="100vw" py="10">
+          <Heading size="2xl" color="#fff" p={4}>
             Sequnce Memory
           </Heading>
-          <Heading size="2xl" color="#fff">
+          <Heading size="xl" color="#fff">
             Level: {playerScore}
           </Heading>
-          <Button
-            mt={10}
-            bg="yellow.400"
-            onClick={() => {
-              setIsOn(true), setIsOver(false)
-            }}
-          >
-            Play again
-          </Button>
+          <Text>Highest Score: {highestScore}</Text>
+          <Text>Average Score: {highestScore}</Text>
+          <Box display="flex" justifyContent="center">
+            <Button mt={10} bg={useColorModeValue('gray.600', '#fbf1c7')}>
+              Save Score
+            </Button>
+            <Button
+              mt={10}
+              bg={useColorModeValue('gray.600', '#fbf1c7')}
+              onClick={() => {
+                setIsOn(true), setIsOver(false)
+              }}
+            >
+              Play again
+            </Button>
+          </Box>
         </Box>
       </Board>
     )

@@ -1,7 +1,7 @@
-import { Box, Center, Heading } from '@chakra-ui/react'
+import { Box, Center } from '@chakra-ui/react'
 const Board = ({ children }) => {
   return (
-    <Center w="100%" h="70%" bg="#2b87d1">
+    <Center w="100%" h="100%" bg="#282828">
       <Box
         display="flex"
         p={2}

@@ -13,7 +13,7 @@ import Titlescreen from '../components/titlescreen'
 function Home() {
   return (
     <Box h="100%">
-      <Center w="100%" h="70%" bg="#2b87d1">
+      <Center w="100%" h="95%">
         <Box
           display="flex"
           p={2}
@@ -22,12 +22,13 @@ function Home() {
           justifyContent="center"
         >
           <Titlescreen
-            title="Human Benchmark"
-            symbol="⚡️"
+            title="Cognitive Caliber"
+            symbol="🃞"
             button="Get Started"
             onStatusChange=""
           >
-            Measure your abilities with brain games and cognitive tests.
+            Measure your Cognitive Caliber by completing memorization and brain
+            games!
           </Titlescreen>
         </Box>
       </Center>

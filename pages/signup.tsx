@@ -16,14 +16,12 @@ import {
   Divider,
   Alert
 } from '@chakra-ui/react'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { OAuthButtonGroup } from '../components/login/OAuthButtonGroup'
 import { useAuth } from '../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { useDB } from '../contexts/DatabaseContext'
-import { setDoc, doc } from 'firebase/firestore'
-import { db } from '../firebase'
 
 function Signup() {
   const [showPassword, setShowPassword] = useState(false)
