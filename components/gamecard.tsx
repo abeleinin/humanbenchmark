@@ -13,8 +13,8 @@ const Gamecard = ({ children, name, symbol, to }) => {
     <Container>
       <Link to={to}>
         <Box
-          w="30vw"
-          h="30vh"
+          w={{ base: '60vw', md: '20vw' }}
+          h="40vh"
           textAlign="center"
           bg={useColorModeValue('#E6E6E6', '#545454')}
           color={useColorModeValue('gray.800', 'gray.200')}

@@ -4,7 +4,8 @@ import {
   Box,
   Heading,
   Wrap,
-  WrapItem
+  WrapItem,
+  useColorModeValue
 } from '@chakra-ui/react'
 import Footer from '../components/footer'
 import Gamecard from '../components/gamecard'
@@ -27,11 +28,19 @@ function Home() {
             button="Get Started"
             onStatusChange=""
           >
-            Measure your Cognitive Caliber by completing memorization and brain
+            Measure your Cognitive Caliber by playing memorization and brain
             games!
           </Titlescreen>
         </Box>
       </Center>
+      <Heading
+        size="3xl"
+        color={useColorModeValue('gray.800', 'gray.200')}
+        textAlign="center"
+        py="4"
+      >
+        Games
+      </Heading>
       <Container maxW={'full'}>
         <Wrap mx="100px" spacingX="5px" spacingY="30px" justify="center" py={8}>
           <WrapItem>

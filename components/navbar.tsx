@@ -111,7 +111,6 @@ export default function WithSubnavigation() {
           </Button>
         </Stack>
       </Flex>
-
       <Collapse in={isOpen} animateOpacity>
         <MobileNav />
       </Collapse>
@@ -168,43 +167,6 @@ const DesktopNav = () => {
   )
 }
 
-const DesktopSubNav = ({ label, to, subLabel }: NavItem) => {
-  return (
-    <Link
-      href={href}
-      role={'group'}
-      display={'block'}
-      p={2}
-      rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}
-    >
-      <Stack direction={'row'} align={'center'}>
-        <Box>
-          <Text
-            transition={'all .3s ease'}
-            _groupHover={{ color: 'pink.400' }}
-            fontWeight={500}
-          >
-            {label}
-          </Text>
-          <Text fontSize={'sm'}>{subLabel}</Text>
-        </Box>
-        <Flex
-          transition={'all .3s ease'}
-          transform={'translateX(-10px)'}
-          opacity={0}
-          _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-          justify={'flex-end'}
-          align={'center'}
-          flex={1}
-        >
-          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
-        </Flex>
-      </Stack>
-    </Link>
-  )
-}
-
 const MobileNav = () => {
   return (
     <Stack
@@ -219,7 +181,7 @@ const MobileNav = () => {
   )
 }
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
+const MobileNavItem = ({ label, children, to }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
@@ -227,7 +189,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
       <Flex
         py={2}
         as={Link}
-        href={href ?? '#'}
+        href={to ?? '#'}
         justify={'space-between'}
         align={'center'}
         _hover={{
