@@ -16,7 +16,7 @@ const Gamecard = ({ children, name, symbol, to }) => {
           w={{ base: '60vw', md: '20vw' }}
           h="40vh"
           textAlign="center"
-          bg={useColorModeValue('#E6E6E6', '#545454')}
+          bg={useColorModeValue('#E6E6E6', '#1d2021')}
           color={useColorModeValue('gray.800', 'gray.200')}
           shadow="lg"
           borderRadius="lg"
