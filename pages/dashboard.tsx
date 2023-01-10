@@ -10,7 +10,8 @@ import {
   TableContainer,
   Table,
   Th,
-  Td
+  Td,
+  useColorModeValue
 } from '@chakra-ui/react'
 import { SettingsIcon } from '@chakra-ui/icons'
 import { useAuth } from '../contexts/AuthContext'
@@ -50,18 +51,17 @@ function Dashboard() {
 
   return (
     <Box
-      bg={'blue.500'}
+      color={useColorModeValue('gray.800', 'gray.200')}
       h="full"
-      w="70vw"
+      w={{ base: '100vw', md: '70vw' }}
       m="auto"
-      borderRadius="xl"
       display="flex"
       flexDirection="column"
       gap="5"
     >
       <Box
-        bg="whiteAlpha.400"
-        w="25%"
+        bg={useColorModeValue('#f2e5bc', '#1d2021')}
+        w={{ base: '75%', md: '40%' }}
         borderRadius="lg"
         alignSelf="stretch"
         alignItems="flex-start"
@@ -74,31 +74,51 @@ function Dashboard() {
           </Heading>
           <Heading size="lg">{guest ? 'GUEST' : username}</Heading>
         </Box>
-        <Box px="4" pb="4" position="relative" justifyContent={'left'}>
+        <Box px="4" position="relative" justifyContent={'left'}>
           <Heading color="gray.600" size="sm">
             Joined
           </Heading>
           <Heading size="md">{guest ? '?' : joined}</Heading>
         </Box>
         <Center>
-          <Button m="4" bg="yellow.400" hidden={!guest}>
+          <Button
+            m="4"
+            bg={useColorModeValue('gray.600', '#fbf1c7')}
+            color={useColorModeValue('gray.200', 'gray.800')}
+            _hover={{ opacity: '80%' }}
+            hidden={!guest}
+          >
             <Link to={'/signup'}>Sign Up</Link>
           </Button>
-          <Button m="4" bg="yellow.400" hidden={!guest}>
+          <Button
+            m="4"
+            bg={useColorModeValue('gray.600', '#fbf1c7')}
+            color={useColorModeValue('gray.200', 'gray.800')}
+            _hover={{ opacity: '80%' }}
+            hidden={!guest}
+          >
             <Link to={'/login'}>Log In</Link>
           </Button>
           <Button
-            leftIcon={<SettingsIcon />}
-            bg="gray.400"
+            m="4"
+            bg={useColorModeValue('gray.600', '#fbf1c7')}
+            color={useColorModeValue('gray.200', 'gray.800')}
+            _hover={{ opacity: '80%' }}
             hidden={guest}
-            mb="4"
+            leftIcon={<SettingsIcon />}
           >
             Settings
           </Button>
         </Center>
       </Box>
-      <Center bg="whiteAlpha.400" p="4" w="80%" mx="auto" borderRadius="xl">
-        <TableContainer w="80%">
+      <Center
+        bg={useColorModeValue('#f2e5bc', '#1d2021')}
+        p={{ base: '0', md: '4' }}
+        w={{ base: '100%', md: '80%' }}
+        mx={{ base: '0', md: 'auto' }}
+        borderRadius="xl"
+      >
+        <TableContainer w={{ base: '100%', md: '80%' }}>
           <Table variant="simple">
             <Thead>
               <Tr>
@@ -122,7 +142,11 @@ function Dashboard() {
                   <Heading size="lg">{guest ? '?' : sequence}</Heading>
                 </Td>
                 <Td>
-                  <Button bg="yellow.400">
+                  <Button
+                    bg={useColorModeValue('gray.600', '#fbf1c7')}
+                    color={useColorModeValue('gray.200', 'gray.800')}
+                    _hover={{ opacity: '80%' }}
+                  >
                     <Link to={'/tests/sequence'}>Play</Link>
                   </Button>
                 </Td>
@@ -135,7 +159,11 @@ function Dashboard() {
                   <Heading size="lg">?</Heading>
                 </Td>
                 <Td>
-                  <Button bg="yellow.400">
+                  <Button
+                    bg={useColorModeValue('gray.600', '#fbf1c7')}
+                    color={useColorModeValue('gray.200', 'gray.800')}
+                    _hover={{ opacity: '80%' }}
+                  >
                     <Link to={'/tests/one-to-fifty'}>Play</Link>
                   </Button>
                 </Td>
@@ -148,7 +176,11 @@ function Dashboard() {
                   <Heading size="lg">?</Heading>
                 </Td>
                 <Td>
-                  <Button bg="yellow.400">
+                  <Button
+                    bg={useColorModeValue('gray.600', '#fbf1c7')}
+                    color={useColorModeValue('gray.200', 'gray.800')}
+                    _hover={{ opacity: '80%' }}
+                  >
                     <Link to={'/tests/mental-math'}>Play</Link>
                   </Button>
                 </Td>
@@ -161,7 +193,11 @@ function Dashboard() {
                   <Heading size="lg">?</Heading>
                 </Td>
                 <Td>
-                  <Button bg="yellow.400">
+                  <Button
+                    bg={useColorModeValue('gray.600', '#fbf1c7')}
+                    color={useColorModeValue('gray.200', 'gray.800')}
+                    _hover={{ opacity: '80%' }}
+                  >
                     <Link to={'/dashboard'}>Play</Link>
                   </Button>
                 </Td>
@@ -174,7 +210,11 @@ function Dashboard() {
                   <Heading size="lg">?</Heading>
                 </Td>
                 <Td>
-                  <Button bg="yellow.400">
+                  <Button
+                    bg={useColorModeValue('gray.600', '#fbf1c7')}
+                    color={useColorModeValue('gray.200', 'gray.800')}
+                    _hover={{ opacity: '80%' }}
+                  >
                     <Link to={'/dashboard'}>Play</Link>
                   </Button>
                 </Td>

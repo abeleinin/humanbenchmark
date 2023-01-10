@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Button, Heading, SimpleGrid, Box, AspectRatio } from '@chakra-ui/react'
+import {
+  Button,
+  Heading,
+  SimpleGrid,
+  Box,
+  useColorModeValue
+} from '@chakra-ui/react'
 import Board from '../../components/board'
 import Titlescreen from '../../components/titlescreen'
 
@@ -92,13 +98,18 @@ function OneToFifty() {
       <Board>
         <Box>
           <Box display={'flex'} justifyContent={'space-around'}>
-            <Heading size="lg" py={4} color="blue.200" justifyItems={'left'}>
+            <Heading
+              size="lg"
+              py={4}
+              justifyItems={'left'}
+              color={useColorModeValue('gray.800', 'gray.200')}
+            >
               Time:
             </Heading>
             <Heading
               size="lg"
               py={4}
-              color="blue.200"
+              color={useColorModeValue('gray.800', 'gray.200')}
               width={'24'}
               justifyItems={'right'}
             >

@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Box, Heading, Textarea, Button } from '@chakra-ui/react'
+import {
+  Box,
+  Heading,
+  Textarea,
+  Button,
+  useColorModeValue
+} from '@chakra-ui/react'
 import Board from '../../components/board'
 import Level from '../../components/level'
 import Titlescreen from '../../components/titlescreen'
@@ -75,14 +81,27 @@ function MentalMath() {
   if (isOn) {
     return (
       <Board>
-        <Box>
+        <Box
+          bg={useColorModeValue('#f2e5bc', '#1d2021')}
+          p="5"
+          borderRadius={'xl'}
+        >
           <Box>
             <Level>{play.score}</Level>
-            <Heading size="lg" py={2} color="blue.200" justifyItems={'left'}>
+            <Heading
+              size="lg"
+              py={2}
+              justifyItems={'left'}
+              color={useColorModeValue('gray.800', 'gray.200')}
+            >
               Time: {time}
             </Heading>
           </Box>
-          <Box display="flex" alignItems="center">
+          <Box
+            display="flex"
+            alignItems="center"
+            color={useColorModeValue('gray.800', 'gray.200')}
+          >
             <Box>
               <Heading>
                 {play.numberOne} x {play.numberTwo} =

@@ -6,7 +6,6 @@ const providers = [
   { name: 'Twitter', icon: <TwitterIcon boxSize="5" /> },
   { name: 'GitHub', icon: <GitHubIcon boxSize="5" /> }
 ]
-
 export const OAuthButtonGroup = () => (
   <ButtonGroup variant="outline" spacing="4" width="full">
     {providers.map(({ name, icon }) => (

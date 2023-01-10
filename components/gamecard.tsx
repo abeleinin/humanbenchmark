@@ -16,13 +16,13 @@ const Gamecard = ({ children, name, symbol, to }) => {
           w={{ base: '60vw', md: '20vw' }}
           h="40vh"
           textAlign="center"
-          bg={useColorModeValue('#E6E6E6', '#1d2021')}
+          bg={useColorModeValue('#f2e5bc', '#1d2021')}
           color={useColorModeValue('gray.800', 'gray.200')}
           shadow="lg"
           borderRadius="lg"
           cursor="pointer"
           pt={8}
-          _hover={{ bg: useColorModeValue('EAEAEA', '#454545') }}
+          _hover={{ bg: useColorModeValue('#f5e4ae', '#454545') }}
         >
           <Heading size="2xl">{symbol}</Heading>
           <Heading size="lg" mx={4} mt={4}>

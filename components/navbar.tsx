@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import {
   Box,
   Flex,
@@ -10,7 +11,6 @@ import {
   Link,
   Popover,
   PopoverTrigger,
-  PopoverContent,
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
@@ -21,14 +21,22 @@ import {
   CloseIcon,
   MoonIcon,
   SunIcon,
-  ChevronDownIcon,
-  ChevronRightIcon
+  ChevronDownIcon
 } from '@chakra-ui/icons'
 import { Link as RouterLink } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure()
   const { colorMode, toggleColorMode } = useColorMode()
+  const [guest, setGuest] = useState(true)
+  const { currentUser, logoutUser } = useAuth()
+
+  useEffect(() => {
+    if (currentUser != null) {
+      setGuest(false)
+    }
+  }, [currentUser])
 
   return (
     <Box>
@@ -77,18 +85,29 @@ export default function WithSubnavigation() {
           direction={'row'}
           spacing={6}
         >
+          <Button
+            display={{ base: 'none', md: 'inline-flex' }}
+            fontSize={'md'}
+            fontWeight={600}
+            bg={useColorModeValue('gray.600', '#fbf1c7')}
+            color={useColorModeValue('gray.200', 'gray.800')}
+            _hover={{ opacity: '80%' }}
+            hidden={guest}
+            onClick={logoutUser}
+          >
+            Sign Out
+          </Button>
           <RouterLink to={'/signup'}>
             <Button
               display={{ base: 'none', md: 'inline-flex' }}
               fontSize={'md'}
               fontWeight={600}
-              color={'white'}
-              bg={'blue.500'}
-              _hover={{
-                bg: 'orange.300'
-              }}
+              bg={useColorModeValue('gray.600', '#fbf1c7')}
+              color={useColorModeValue('gray.200', 'gray.800')}
+              _hover={{ opacity: '80%' }}
+              hidden={!guest}
             >
-              Sign In
+              Sign Up
             </Button>
           </RouterLink>
           <RouterLink to={'login'}>
@@ -96,13 +115,12 @@ export default function WithSubnavigation() {
               display={{ base: 'none', md: 'inline-flex' }}
               fontSize={'md'}
               fontWeight={600}
-              color={'white'}
-              bg={'orange.400'}
-              _hover={{
-                bg: 'orange.300'
-              }}
+              bg={useColorModeValue('gray.600', '#fbf1c7')}
+              color={useColorModeValue('gray.200', 'gray.800')}
+              _hover={{ opacity: '80%' }}
+              hidden={!guest}
             >
-              Sign Up
+              Log In
             </Button>
           </RouterLink>
 
@@ -129,37 +147,21 @@ const DesktopNav = () => {
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
-              <RouterLink
-                p={2}
-                to={navItem.to ?? '#'}
-                fontSize={'sm'}
-                fontWeight={500}
-                color={linkColor}
-                _hover={{
-                  textDecoration: 'none',
-                  color: linkHoverColor
-                }}
-              >
-                {navItem.label}
+              <RouterLink to={navItem.to ?? '#'}>
+                <Link
+                  p={2}
+                  fontSize={'sm'}
+                  fontWeight={500}
+                  color={linkColor}
+                  _hover={{
+                    textDecoration: 'none',
+                    color: linkHoverColor
+                  }}
+                >
+                  {navItem.label}
+                </Link>
               </RouterLink>
             </PopoverTrigger>
-
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={'xl'}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={'xl'}
-                minW={'sm'}
-              >
-                <Stack>
-                  {navItem.children.map(child => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )}
           </Popover>
         </Box>
       ))}
@@ -243,7 +245,7 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Cognitive Caliber',
+    label: 'Human Benchmark',
     to: '/'
   },
   {

@@ -34,7 +34,7 @@ const Titlescreen = ({
         <br />
         <Button
           bg={useColorModeValue('gray.600', '#fbf1c7')}
-          _hover={{ opacity: '90%' }}
+          _hover={{ opacity: '80%' }}
           my={4}
           color={useColorModeValue('gray.200', 'gray.800')}
           fontSize="14pt"

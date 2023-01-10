@@ -1,7 +1,7 @@
-import { Box, Center } from '@chakra-ui/react'
+import { Box, Center, useColorModeValue } from '@chakra-ui/react'
 const Board = ({ children }) => {
   return (
-    <Center w="100%" h="100%" bg="#282828">
+    <Center w="100%" h="100%" bg={useColorModeValue('#fbf1c7', '#282828')}>
       <Box
         display="flex"
         p={2}

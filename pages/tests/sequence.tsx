@@ -141,11 +141,14 @@ function Sequence() {
               numberList.map((v, i) => (
                 <Button
                   key={v}
-                  bg="white"
+                  bg={
+                    flashTile === v
+                      ? 'white'
+                      : useColorModeValue('#f2e5bc', '#1d2021')
+                  }
                   p={{ base: '10', md: '14' }}
                   rounded="md"
-                  opacity={flashTile === v ? '1' : '0.2'}
-                  _hover={{}}
+                  _hover={{ bg: useColorModeValue('#f2e5bc', '#1d2021') }}
                   onClick={() => tileClickHandle(v)}
                 ></Button>
               ))}
@@ -156,22 +159,20 @@ function Sequence() {
   } else if (isOver) {
     return (
       <Board>
-        <Box bg="#fe8019" w="100vw" py="10">
-          <Heading size="2xl" color="#fff" p={4}>
+        <Box
+          bg={useColorModeValue('#f2e5bc', '#1d2021')}
+          color={useColorModeValue('gray.800', 'gray.200')}
+          w="100vw"
+          py="10"
+        >
+          <Heading size="2xl" p={4}>
             Sequnce Memory
           </Heading>
-          <Heading size="xl" color="#fff">
-            Level: {playerScore}
-          </Heading>
-          <Text>Highest Score: {highestScore}</Text>
-          <Text>Average Score: {highestScore}</Text>
-          <Box display="flex" justifyContent="center">
-            <Button mt={10} bg={useColorModeValue('gray.600', '#fbf1c7')}>
-              Save Score
-            </Button>
+          <Heading size="xl">Level: {playerScore}</Heading>
+          <Box display="flex" justifyContent="center" gap="5">
+            <Button mt={10}>Save Score</Button>
             <Button
               mt={10}
-              bg={useColorModeValue('gray.600', '#fbf1c7')}
               onClick={() => {
                 setIsOn(true), setIsOver(false)
               }}

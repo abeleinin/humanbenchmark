@@ -23,12 +23,12 @@ function Home() {
           justifyContent="center"
         >
           <Titlescreen
-            title="Cognitive Caliber"
+            title="Human Benchmark"
             symbol="🃞"
             button="Get Started"
             onStatusChange=""
           >
-            Measure your Cognitive Caliber by playing memorization and brain
+            Measure your Cognitive Capacity by playing memorization and brain
             games!
           </Titlescreen>
         </Box>
