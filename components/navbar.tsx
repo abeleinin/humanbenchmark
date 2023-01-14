@@ -38,6 +38,11 @@ export default function WithSubnavigation() {
     }
   }, [currentUser])
 
+  function signOut() {
+    logoutUser()
+    setGuest(false)
+  }
+
   return (
     <Box>
       <Flex
@@ -93,7 +98,7 @@ export default function WithSubnavigation() {
             color={useColorModeValue('gray.200', 'gray.800')}
             _hover={{ opacity: '80%' }}
             hidden={guest}
-            onClick={logoutUser}
+            onClick={signOut}
           >
             Sign Out
           </Button>
@@ -142,7 +147,7 @@ const DesktopNav = () => {
   const popoverContentBgColor = useColorModeValue('white', 'gray.800')
 
   return (
-    <Stack direction={'row'} spacing={4} position="absolute">
+    <Stack direction={'row'} spacing={4}>
       {NAV_ITEMS.map(navItem => (
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
@@ -150,8 +155,8 @@ const DesktopNav = () => {
               <RouterLink to={navItem.to ?? '#'}>
                 <Link
                   p={2}
-                  fontSize={'sm'}
-                  fontWeight={500}
+                  fontSize={'md'}
+                  fontWeight={700}
                   color={linkColor}
                   _hover={{
                     textDecoration: 'none',
@@ -246,6 +251,10 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: 'Human Benchmark',
+    to: '/'
+  },
+  {
+    label: 'Games',
     to: '/'
   },
   {

@@ -11,7 +11,8 @@ import {
   Table,
   Th,
   Td,
-  useColorModeValue
+  useColorModeValue,
+  ButtonGroup
 } from '@chakra-ui/react'
 import { SettingsIcon } from '@chakra-ui/icons'
 import { useAuth } from '../contexts/AuthContext'
@@ -61,11 +62,12 @@ function Dashboard() {
     >
       <Box
         bg={useColorModeValue('#f2e5bc', '#1d2021')}
-        w={{ base: '75%', md: '40%' }}
+        p={{ base: '0', md: '4' }}
+        w={{ base: '100%', md: '80%' }}
+        mx={{ base: '0', md: 'auto' }}
         borderRadius="lg"
         alignSelf="stretch"
         alignItems="flex-start"
-        mx="auto"
         mt="5"
       >
         <Box p="4">
@@ -81,34 +83,36 @@ function Dashboard() {
           <Heading size="md">{guest ? '?' : joined}</Heading>
         </Box>
         <Center>
-          <Button
-            m="4"
-            bg={useColorModeValue('gray.600', '#fbf1c7')}
-            color={useColorModeValue('gray.200', 'gray.800')}
-            _hover={{ opacity: '80%' }}
-            hidden={!guest}
-          >
-            <Link to={'/signup'}>Sign Up</Link>
-          </Button>
-          <Button
-            m="4"
-            bg={useColorModeValue('gray.600', '#fbf1c7')}
-            color={useColorModeValue('gray.200', 'gray.800')}
-            _hover={{ opacity: '80%' }}
-            hidden={!guest}
-          >
-            <Link to={'/login'}>Log In</Link>
-          </Button>
-          <Button
-            m="4"
-            bg={useColorModeValue('gray.600', '#fbf1c7')}
-            color={useColorModeValue('gray.200', 'gray.800')}
-            _hover={{ opacity: '80%' }}
-            hidden={guest}
-            leftIcon={<SettingsIcon />}
-          >
-            Settings
-          </Button>
+          <ButtonGroup>
+            <Button
+              m="4"
+              bg={useColorModeValue('gray.600', '#fbf1c7')}
+              color={useColorModeValue('gray.200', 'gray.800')}
+              _hover={{ opacity: '80%' }}
+              hidden={!guest}
+            >
+              <Link to={'/signup'}>Sign Up</Link>
+            </Button>
+            <Button
+              m="4"
+              bg={useColorModeValue('gray.600', '#fbf1c7')}
+              color={useColorModeValue('gray.200', 'gray.800')}
+              _hover={{ opacity: '80%' }}
+              hidden={!guest}
+            >
+              <Link to={'/login'}>Log In</Link>
+            </Button>
+            <Button
+              m="4"
+              bg={useColorModeValue('gray.600', '#fbf1c7')}
+              color={useColorModeValue('gray.200', 'gray.800')}
+              _hover={{ opacity: '80%' }}
+              hidden={guest}
+              leftIcon={<SettingsIcon />}
+            >
+              Settings
+            </Button>
+          </ButtonGroup>
         </Center>
       </Box>
       <Center
