@@ -7,7 +7,9 @@
     "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "prettier": "prettier -write",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d build"
   },
   "keywords": [],
   "author": "Abe Leinigner",
@@ -30,6 +32,7 @@
     "@types/react": "18.0.20",
     "eslint": "^8.23.1",
     "eslint-config-next": "^12.3.0",
+    "gh-pages": "^5.0.0",
     "prettier": "^2.7.1"
   }
 }
