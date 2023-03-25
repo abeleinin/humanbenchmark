@@ -33,7 +33,9 @@ function Sequence() {
       setPlay({ ...initPlay, isDisplay: true })
     } else {
       setPlay(initPlay)
-      updateData(currentUser.uid, 'sequence', playerScore)
+      if (currentUser != null) {
+        updateData(currentUser.uid, 'sequence', playerScore)
+      }
     }
   }, [isOn])
 
