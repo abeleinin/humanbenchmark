@@ -5,7 +5,6 @@ import { useDB } from '../../contexts/DatabaseContext'
 import Board from '../../components/board'
 import Titlescreen from '../../components/titlescreen'
 import timeout from '../../components/util'
-import Level from '../../components/level'
 
 function VisualMemory() {
   const [isOn, setIsOn] = useState(false)
@@ -66,8 +65,7 @@ function VisualMemory() {
     if (isOn && play.isDisplay) {
       let patternIdsSet = new Set();
       let maskDistribution = new Array(true, true, true, true, true, false, false, false, false, false)
-      let mask = maskDistribution.sort((a, b) => 0.5 - Math.random());
-      console.log(mask)
+      let mask = maskDistribution.sort(() => 0.5 - Math.random());
       setUserData({'correct': [], 'mask': [], 'Date': new Date()})
 
       while (patternIdsSet.size < play.score) {
@@ -76,7 +74,6 @@ function VisualMemory() {
 
       let patternIds = Array.from(patternIdsSet);
 
-      console.log(patternIds)
       setPlay({ ...play, tilePattern: patternIds, mask: mask })
     }
   }, [isOn, play.isDisplay])
@@ -173,7 +170,7 @@ function VisualMemory() {
           {/* <Level>{play.score}</Level> */}
           <SimpleGrid spacing='1' columns={{ md: 6 }}>
             {numberList &&
-              numberList.map((v, i) => (
+              numberList.map((v, _) => (
                 <Button
                   key={v}
                   // bg={wrongTile.includes(v) ? 'black' : 'white'}

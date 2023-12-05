@@ -112,7 +112,7 @@ function OneToFifty() {
             maxHeight="300"
           >
             {play.numberListDisplay &&
-              play.numberListDisplay.map((v, i) => (
+              play.numberListDisplay.map((v, _) => (
                 <Button
                   // hidden={seenList.includes(v) ? true : false}
                   hidden={play.currentNumber > 50 ? true : false}

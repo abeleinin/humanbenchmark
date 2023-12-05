@@ -1,5 +1,4 @@
-import NextLink from 'next/link'
-import { Box, Center, Container, Heading, Text } from '@chakra-ui/react'
+import { Box, Container, Heading, Text } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 
 const Gamecard = ({ children, name, symbol, to }) => {

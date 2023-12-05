@@ -34,7 +34,7 @@ function Navbar(props) {
   const { path } = props
   const [guest, setGuest] = useState(true)
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
+  // const [error, setError] = useState('')
   const { logoutUser, currentUser } = useAuth()
   const { getData } = useDB()
   const [username, setUsername] = useState('')
@@ -56,7 +56,7 @@ function Navbar(props) {
       setUsername('')
       await logoutUser()
     } catch (e) {
-      setError('Failed')
+      // setError('Failed')
     }
     setLoading(false)
   }

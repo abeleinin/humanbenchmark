@@ -25,7 +25,6 @@ function Dashboard() {
   const [joined, setJoined] = useState('')
 
   const [sequence, setSequence] = useState('0')
-  const [visual, setVisual] = useState('0')
 
   async function getUsername() {
     const userData = await getData()
@@ -121,7 +120,7 @@ function Dashboard() {
                   <Heading size="md">Visual Memory</Heading>
                 </Td>
                 <Td>
-                  <Heading size="lg">{guest ? '?' : visual}</Heading>
+                  <Heading size="lg">?</Heading>
                 </Td>
                 <Td>
                   <Button bg="yellow.400">

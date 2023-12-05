@@ -128,7 +128,7 @@ function Sequence() {
           <Level>{play.score}</Level>
           <SimpleGrid spacing="5" columns={{ md: 3 }}>
             {numberList &&
-              numberList.map((v, i) => (
+              numberList.map((v, _) => (
                 <Button
                   key={v}
                   bg="white"

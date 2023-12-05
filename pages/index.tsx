@@ -2,7 +2,6 @@ import {
   Center,
   Container,
   Box,
-  Heading,
   Wrap,
   WrapItem
 } from '@chakra-ui/react'
