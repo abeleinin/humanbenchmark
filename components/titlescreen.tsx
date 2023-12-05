@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 import { Heading } from '@chakra-ui/react'
 import { Box, Button } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 const Titlescreen = ({
   children,

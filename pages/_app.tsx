@@ -11,6 +11,7 @@ import Sequence from './tests/sequence'
 import OneToFifty from './tests/one-to-fifty'
 import MentalMath from './tests/mental-math'
 import Dashboard from './dashboard'
+import VisualMemory from './tests/visual-memory'
 
 const Website = ({ router }) => {
   return (
@@ -25,6 +26,7 @@ const Website = ({ router }) => {
                 <Route path={'/login'} element={<Login />}></Route>
                 <Route path={'/dashboard'} element={<Dashboard />}></Route>
                 <Route path={'/tests/sequence'} element={<Sequence />}></Route>
+                <Route path={'/tests/visual-memory'} element={<VisualMemory />}></Route>
                 <Route
                   path={'/tests/one-to-fifty'}
                   element={<OneToFifty />}

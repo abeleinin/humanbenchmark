@@ -34,8 +34,13 @@ function Home() {
       <Container maxW={'full'}>
         <Wrap mx="100px" spacingX="5px" spacingY="30px" justify="center" py={8}>
           <WrapItem>
+            <Gamecard name="Visual Memory" symbol="👀" to="/tests/visual-memory">
+              Remember the pattern of squares.
+            </Gamecard>
+          </WrapItem>
+          <WrapItem>
             <Gamecard name="Sequence Memory" symbol="🧠" to="/tests/sequence">
-              Remember an increasingly long pattern of button presses.
+              Remember an increasingly long pattern of squares.
             </Gamecard>
           </WrapItem>
           <WrapItem>
@@ -44,28 +49,13 @@ function Home() {
             </Gamecard>
           </WrapItem>
           <WrapItem>
-            <Gamecard name="Mental Math" symbol="🔢" to="/tests/mental-math">
-              Solve as many mental math equations as fast as possible!
+            <Gamecard name="Mental Math" symbol="🧮" to="/tests/mental-math">
+              Solve as many mental math equations in 30 seconds!
             </Gamecard>
           </WrapItem>
           <WrapItem>
-            <Gamecard name="Reaction Time" symbol="⚡️" to="/tests/reaction">
+            <Gamecard name="Number Memory" symbol="🚧" to="/">
               Coming soon!
-            </Gamecard>
-          </WrapItem>
-          <WrapItem>
-            <Gamecard name="Aim Trainer" symbol="🎯" to="/">
-              Coming soon!
-            </Gamecard>
-          </WrapItem>
-          <WrapItem>
-            <Gamecard name="Number Memory" symbol="🔢" to="/tests/number">
-              Coming soon!
-            </Gamecard>
-          </WrapItem>
-          <WrapItem>
-            <Gamecard name="Verbal Memory" symbol="🗣" to="/">
-              Coming Soon!
             </Gamecard>
           </WrapItem>
         </Wrap>

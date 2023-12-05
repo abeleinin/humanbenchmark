@@ -10,7 +10,8 @@ import Level from '../../components/level'
 function Sequence() {
   const [isOn, setIsOn] = useState(false)
   const [isOver, setIsOver] = useState(false)
-  const numberList = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
+  const numberList = Array.from(Array(9).keys()).map((i) => i.toString())
+
   const initPlay = {
     isDisplay: false,
     userTurn: false,

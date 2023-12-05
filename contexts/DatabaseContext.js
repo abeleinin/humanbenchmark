@@ -18,9 +18,8 @@ export function DatabaseProvider({ children }) {
       username: username,
       email: email,
       joined: new Date(),
-      sequence: 0,
-      onetofifty: 0,
-      mentalmath: 0
+      visual: [],
+      sequence: []
     }
     await setDoc(docRef, data)
   }

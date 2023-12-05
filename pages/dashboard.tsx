@@ -23,7 +23,9 @@ function Dashboard() {
   const [guest, setGuest] = useState(true)
   const [username, setUsername] = useState('')
   const [joined, setJoined] = useState('')
+
   const [sequence, setSequence] = useState('0')
+  const [visual, setVisual] = useState('0')
 
   async function getUsername() {
     const userData = await getData()
@@ -116,6 +118,19 @@ function Dashboard() {
             <Tbody>
               <Tr>
                 <Td>
+                  <Heading size="md">Visual Memory</Heading>
+                </Td>
+                <Td>
+                  <Heading size="lg">{guest ? '?' : visual}</Heading>
+                </Td>
+                <Td>
+                  <Button bg="yellow.400">
+                    <Link to={'/tests/visual-memory'}>Play</Link>
+                  </Button>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>
                   <Heading size="md">Sequence Memory</Heading>
                 </Td>
                 <Td>
@@ -150,32 +165,6 @@ function Dashboard() {
                 <Td>
                   <Button bg="yellow.400">
                     <Link to={'/tests/mental-math'}>Play</Link>
-                  </Button>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>
-                  <Heading size="md">Reaction Time</Heading>
-                </Td>
-                <Td>
-                  <Heading size="lg">?</Heading>
-                </Td>
-                <Td>
-                  <Button bg="yellow.400">
-                    <Link to={'/dashboard'}>Play</Link>
-                  </Button>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>
-                  <Heading size="md">Aim Trainer</Heading>
-                </Td>
-                <Td>
-                  <Heading size="lg">?</Heading>
-                </Td>
-                <Td>
-                  <Button bg="yellow.400">
-                    <Link to={'/dashboard'}>Play</Link>
                   </Button>
                 </Td>
               </Tr>

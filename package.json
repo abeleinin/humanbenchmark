@@ -8,8 +8,8 @@
     "build": "next build",
     "prettier": "prettier -write",
     "lint": "next lint",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "Abe Leinigner",
@@ -20,6 +20,7 @@
     "@chakra-ui/react": "^2.3.2",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "dotenv": "^16.3.1",
     "firebase": "^9.15.0",
     "framer-motion": "^7.3.4",
     "next": "^12.3.0",
