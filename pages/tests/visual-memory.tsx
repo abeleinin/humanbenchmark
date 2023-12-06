@@ -10,7 +10,6 @@ function VisualMemory() {
   const [isOn, setIsOn] = useState(false)
   const [isOver, setIsOver] = useState(false)
   const numberList = Array.from(Array(36).keys()).map((i) => i.toString())
-  const [playerScore, setPlayerScore] = useState(0)
 
   const initPlay = {
     isDisplay: false,
@@ -27,8 +26,9 @@ function VisualMemory() {
   const [flashTile, setFlashTile] = useState([])
   const [wrongTile, setWrongTile] = useState([])
   const [rewardTile, setRewardTile] = useState([])
-  // const [playerScore, setPlayerScore] = useState(0)
+  const [playerScore, setPlayerScore] = useState(0)
   const [playerTrial, setPlayerTrial] = useState(0)
+
   const [userData, setUserData] = useState({'correct': [], 'mask': [], 'Date': new Date()})
 
   const { currentUser } = useAuth()
@@ -56,7 +56,7 @@ function VisualMemory() {
         }).catch(error => {
           console.error('Error fetching user game history:', error.message);
         });
-      // setPlay(initPlay)
+      setPlay(initPlay)
     }
   }, [isOn])
 
@@ -64,7 +64,9 @@ function VisualMemory() {
   useEffect(() => {
     if (isOn && play.isDisplay) {
       let patternIdsSet = new Set();
-      let maskDistribution = new Array(true, true, true, true, true, false, false, false, false, false)
+      let maskTrue = Array.from(Array(25).keys()).map(() => true)
+      let maskFalse = Array.from(Array(25).keys()).map(() => false)
+      let maskDistribution = maskTrue.concat(maskFalse)
       let mask = maskDistribution.sort(() => 0.5 - Math.random());
       setUserData({'correct': [], 'mask': [], 'Date': new Date()})
 
@@ -80,11 +82,10 @@ function VisualMemory() {
 
   // Display sequence of tiles
   useEffect(() => {
-    if (playerTrial > 9) {
+    if (playerTrial > 49) {
       setUserData({'correct': play.userCorrect, 'mask': play.mask, 'Date': new Date()})
       setIsOver(true)
       setIsOn(false)
-      setPlay(initPlay)
     } else if (isOn && play.isDisplay && play.tilePattern.length) {
       displayTiles()
     }
@@ -143,9 +144,6 @@ function VisualMemory() {
         setFlashTile([])
 
         // Update incorrect answer in database here 
-        userData.correct = [...userData.correct, 0]
-        setUserData(userData)
-        
         setPlayerTrial(playerTrial + 1)
 
         setPlay({ ...play, 
@@ -194,7 +192,7 @@ function VisualMemory() {
             Visual Memory
           </Heading>
           <Heading size='xl' color='#fff' p={2}>
-            Score: {playerScore} / 10
+            Score: {playerScore} / 50
           </Heading>
           <Heading size='2xl' color='#fff'>
             Thank you for playing!
@@ -220,8 +218,8 @@ function VisualMemory() {
           button='Start'
           onStatusChange={setIsOn}
         >
-          Remember the 7 tile pattern on an 6 x 6 grid. 
-          The game is repeated 10 times.
+          Remember the 7 tile pattern on a 6 x 6 grid. 
+          The game is repeated 50 times.
         </Titlescreen>
       </Board>
     )
